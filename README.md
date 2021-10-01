@@ -34,7 +34,7 @@
 
 ### Association
 - belongs_to :user
-- has_one   :purchase_records
+- has_one   :purchase_record
 
 ## purchase_records テーブル
 
@@ -51,15 +51,15 @@
 
 ## delivery_addresses テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| post_code          | text       | null: false                    |
-| prefecture_id      | integer    | null: false                    |
-| city               | text       | null: false                    |
-| address            | text       | null: false                    |
-| building_name      | text       |                                |
-| phone_number       | text       | null: false                    | 
-| purchase_record    | references | null: false, foreign_key: true |
+| Column             | Type        | Options                         |
+| ------------------ | ----------- | ------------------------------- |
+| post_code          | string      | null: false                     |
+| shipping_area_id    | integer    | null: false,  foreign_key: true |
+| city               | string      | null: false                     |
+| address            | string      | null: false                     |
+| building_name      | string      |                                 |
+| phone_number       | string      | null: false                     | 
+| purchase_record    | references  | null: false, foreign_key: true  |
 ### Association
 - belongs_to    :purchase_record
 
