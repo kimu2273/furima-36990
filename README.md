@@ -24,17 +24,17 @@
 | ------------------- | ---------- | ------------------------------ |
 | name                | string     | null: false                    |
 | explanation         | text       | null: false                    |
-| category            | integer    | null: false                    |
+| category_id         | integer    | null: false                    |
 | condition_id        | integer    | null: false                    |
 | shipping_charges_id | integer    | null: false                    |
 | shipping_days_id    | integer    | null: false                    |
 | shipping_area_id    | integer    | null: false                    |
-| price               | text       | null: false                    |
+| price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_many   :purchase_records
+- has_one   :purchase_records
 
 ## purchase_records テーブル
 
@@ -54,12 +54,12 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | post_code          | text       | null: false                    |
-| prefecture         | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | text       | null: false                    |
 | address            | text       | null: false                    |
-| building_name      | text       | null: false                    |
+| building_name      | text       |                                |
 | phone_number       | text       | null: false                    | 
 | purchase_record    | references | null: false, foreign_key: true |
 ### Association
-- belongs_to    :purchase_records
+- belongs_to    :purchase_record
 
