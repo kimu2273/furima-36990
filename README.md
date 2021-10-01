@@ -9,37 +9,32 @@
 | last_name          | string  | null: false               |
 | first_name_kana    | string  | null: false               |
 | last_name_kana     | string  | null: false               |
-| birth_day          | integer | null: false               |
+| birth_day          | date    | null: false               |
 
 
 ### Association
 - has_many :items
 - has_many :purchase_records
-- has_one  :delivery_addresses
-- belongs_to_active_hash :birth_day
+
+
 
 ## items テーブル
 
-| Column             | Type       | Options                        |
-| ------------------ | ---------- | ------------------------------ |
-| image              | string     | null: false                    |
-| name               | string     | null: false                    |
-| explanation        | text       | null: false                    |
-| category           | integer    | null: false                    |
-| condition          | integer    | null: false                    |
-| shipping_charges   | integer    | null: false                    |
-| shipping_days      | integer    | null: false                    |
-| shipping_area      | integer    | null: false                    |
-| price              | text       | null: false                    |
-| user               | references | null: false, foreign_key: true |
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| name                | string     | null: false                    |
+| explanation         | text       | null: false                    |
+| category            | integer    | null: false                    |
+| condition_id        | integer    | null: false                    |
+| shipping_charges_id | integer    | null: false                    |
+| shipping_days_id    | integer    | null: false                    |
+| shipping_area_id    | integer    | null: false                    |
+| price               | text       | null: false                    |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :users
-- belongs_to_active_hash :category
-- belongs_to_active_hash :condition
-- belongs_to_active_hash :shipping_charges
-- belongs_to_active_hash :shipping_days 
-- belongs_to_active_hash :shipping_area
+- belongs_to :user
+- has_many   :purchase_records
 
 ## purchase_records テーブル
 
@@ -47,11 +42,12 @@
 | ------------------ | ---------- | ------------------------------ |
 | user               | references | null: false, foreign_key: true |
 | item               | references | null: false, foreign_key: true |
-| delivery_address   | references | null: false, foreign_key: true |
+
 
 ### Association
-- belongs_to :users
-- belongs_to :delivery_addresses
+- belongs_to :user
+- has_one :delivery_addresses
+- belongs_to :item
 
 ## delivery_addresses テーブル
 
@@ -63,8 +59,7 @@
 | address            | text       | null: false                    |
 | building_name      | text       | null: false                    |
 | phone_number       | text       | null: false                    | 
-| user               | references | null: false, foreign_key: true |
+| purchase_record    | references | null: false, foreign_key: true |
 ### Association
-- belongs_to :users
-- has_one    :purchase_records
+- belongs_to    :purchase_records
 
