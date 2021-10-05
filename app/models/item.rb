@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :Shipping_area
   belongs_to :shipping_charges
   belongs_to :shipping_days
+  has_one_attached :image
 
   validates :category_id, numericality: { other_than: 1 } 
   validates :condition_id, numericality: { other_than: 1 } 
