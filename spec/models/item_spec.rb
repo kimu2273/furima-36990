@@ -32,27 +32,27 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include "Price can't be blank"
     end
     it 'categoryが空では登録できない' do
-      @item.category_id = ''
+      @item.category_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Category can't be blank"
     end
     it 'conditionが空では登録できない' do
-      @item.condition_id = ''
+      @item.condition_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Condition can't be blank"
     end
     it 'shipping areaが空では登録できない' do
-      @item.shipping_area_id = ''
+      @item.shipping_area_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Shipping area can't be blank"
     end
     it 'shipping chargesが空では登録できない' do
-      @item.shipping_charges_id = ''
+      @item.shipping_charges_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Shipping charges can't be blank"
     end
     it 'shipping daysが空では登録できない' do
-      @item.shipping_days_id = ''
+      @item.shipping_days_id = 1
       @item.valid?
       expect(@item.errors.full_messages).to include "Shipping days can't be blank"
     end
@@ -65,6 +65,17 @@ RSpec.describe Item, type: :model do
       @item.price = '100'
       @item.valid?
       expect(@item.errors.full_messages).to include("Price is out of setting range")
+    end
+    it 'priceが300~9999999でないと登録できない' do
+      @item.price = '1234567890'
+      @item.valid?
+      expect(@item.errors.full_messages).to include("Price is out of setting range")
+    end
+    it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
+    end
     end
   end
 end
