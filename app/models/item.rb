@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
 
   validates :name, :explanation, :price, :image, presence: true
-  validates :price, numericality: {in: 300..9999999, message: "is out of setting range"}, format: {with: /\A(?=.*?[\d])+\z/i, message: "is invalid. Input half-width characters"}
+  validates :price, numericality: {with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters"}, inclusion: {in: 300..9999999, message: "is out of setting range"}
   validates :category_id, numericality:  { other_than: 1 , message: "can't be blank"}
   validates :condition_id, numericality:  { other_than: 1 , message: "can't be blank"}
   validates :shipping_area_id, numericality:  { other_than: 1 , message: "can't be blank"} 
