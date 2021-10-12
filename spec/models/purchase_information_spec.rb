@@ -55,6 +55,11 @@ RSpec.describe PurchaseInformation, type: :model do
       @purchase_information.valid?
       expect(@purchase_information.errors.full_messages).to include "Phone number is too short"
     end
+    it 'phone_numberが短12桁以上では登録できない' do
+      @purchase_information.phone_number = '01234567890'
+      @purchase_information.valid?
+      expect(@purchase_information.errors.full_messages).to include "Phone number is too long"
+    end
     it 'phone_numberが数字でないと登録できない' do
       @purchase_information.phone_number = 'test'
       @purchase_information.valid?

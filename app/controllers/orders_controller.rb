@@ -1,19 +1,14 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user! 
+  before_action :find_item
   def index
     @purchase_information = PurchaseInformation.new
-    @item = Item.find(params[:item_id])
     redirect_root
   end
 
-  def new
-    @purchase_information = PurchaseInformation.new
-    redirect_root
-  end
 
   def create
     @purchase_information = PurchaseInformation.new(purchase_information_params)
-    @item = Item.find(params[:item_id])
     redirect_root
     if  @purchase_information.valid?
       pay_item
@@ -40,9 +35,15 @@ class OrdersController < ApplicationController
     )
   end
 
-def redirect_root
-  if @item.order.present?
-    redirect_to root_path
+  def redirect_root
+    if @item.order.present?
+      redirect_to root_path
+    elsif current_user == @item.user
+      redirect_to root_path
+    end
   end
-end
+
+  def find_item
+    @item = Item.find(params[:item_id])
+  end
 end
