@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-
     @purchase_information = PurchaseInformation.new(purchase_information_params)
     @item = Item.find(params[:item_id])
     if  @purchase_information.valid?
